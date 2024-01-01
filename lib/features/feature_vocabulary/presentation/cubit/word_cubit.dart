@@ -33,6 +33,7 @@ class WordCubit extends Cubit<WordState> {
     words.removeWhere((element) => element.title == title);
     currentPage++;
     emit(WordState.wordsChanged(words),);
+    emit(const WordState.success());
   }
 
   void dontKnow(Word word, int currentIndex) {
@@ -40,5 +41,6 @@ class WordCubit extends Cubit<WordState> {
     words.removeAt(currentIndex);
     currentPage++;
     emit(WordState.wordsChanged(words));
+    emit(const WordState.success());
   }
 }

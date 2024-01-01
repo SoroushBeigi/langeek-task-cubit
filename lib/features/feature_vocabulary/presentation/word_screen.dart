@@ -55,23 +55,9 @@ class _WordScreenState extends State<WordScreen> {
             ),
           ),
           SafeArea(
-            child: BlocConsumer<WordCubit, WordState>(
-              listener: (context, state) {
-                state.whenOrNull(
-                    wordsChanged: (words) => controller.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.linear));
-                //TODO: Implement
-                // if (state is PageChangedState) {
-                //   controller.jumpToPage(state.currentPage,);
-                // }
-                // if (state is NewWordState) {
-                //   controller.nextPage(
-                //       duration: const Duration(milliseconds: 300),
-                //       curve: Curves.linear);
-                // }
-              },
+            child: BlocBuilder<WordCubit, WordState>(
               builder: (context, state) {
+
                 return state.maybeWhen(
                   initial: (index) => Container(),
                   loading: () =>
