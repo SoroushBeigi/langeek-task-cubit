@@ -18,10 +18,12 @@ class WordScreen extends StatefulWidget {
 
 class _WordScreenState extends State<WordScreen> {
   late PageController controller;
+
   @override
   void initState() {
     final cubit = context.read<WordCubit>();
-    controller = PageController(keepPage: false, initialPage: cubit.currentPage);
+    controller =
+        PageController(keepPage: false, initialPage: cubit.currentPage);
     cubit.loadWords();
     super.initState();
   }
@@ -57,9 +59,8 @@ class _WordScreenState extends State<WordScreen> {
               listener: (context, state) {
                 state.whenOrNull(
                     wordsChanged: (words) => controller.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.linear)
-                );
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.linear));
                 //TODO: Implement
                 // if (state is PageChangedState) {
                 //   controller.jumpToPage(state.currentPage,);
@@ -70,7 +71,6 @@ class _WordScreenState extends State<WordScreen> {
                 //       curve: Curves.linear);
                 // }
               },
-
               builder: (context, state) {
                 return state.maybeWhen(
                   initial: (index) => Container(),
@@ -85,12 +85,45 @@ class _WordScreenState extends State<WordScreen> {
                         style: const TextStyle(color: Colors.red),
                       ),
                       ElevatedButton(
-                          onPressed: () =>
-                             cubit.loadWords(),
+                          onPressed: () => cubit.loadWords(),
                           child: const Text('Retry'))
                     ],
                   ),
-                  orElse:()=> successWidget(screenUtil, controller, cubit.words),
+
+                  orElse: () => Center(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: screenUtil.setHeight(69),
+                        ),
+                        SmoothPageIndicator(
+                            controller: controller,
+                            count: cubit.words.length,
+                            effect: SlideEffect(
+                                dotHeight: screenUtil.setHeight(6.9),
+                                spacing: 1,
+                                dotColor: Colors.blueGrey[300]!),
+                            onDotClicked: (index) {
+                              //TODO: Implement
+                              // BlocProvider.of<WordBloc>(context)
+                              //     .add(ChangePageEvent(page: index));
+                            }),
+                        SizedBox(
+                          height: screenUtil.setHeight(13.8),
+                        ),
+                        Expanded(
+                          child: PageView.builder(
+                            itemCount: cubit.words.length,
+                            controller: controller,
+                            itemBuilder: (context, index) => WordDetails(
+                              word: cubit.words[index],
+                              index: index,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),
@@ -99,40 +132,4 @@ class _WordScreenState extends State<WordScreen> {
       ),
     );
   }
-}
-
-Widget successWidget(ScreenUtil screenUtil,PageController controller,List<Word> words){
-  return Center(
-      child: Column(
-        children: [
-          SizedBox(
-            height: screenUtil.setHeight(69),
-          ),
-          SmoothPageIndicator(
-              controller: controller,
-              count: words.length,
-              effect: SlideEffect(
-                  dotHeight: screenUtil.setHeight(6.9),
-                  spacing: 1,
-                  dotColor: Colors.blueGrey[300]!),
-              onDotClicked: (index) {
-                //TODO: Implement
-                // BlocProvider.of<WordBloc>(context)
-                //     .add(ChangePageEvent(page: index));
-              }),
-          SizedBox(
-            height: screenUtil.setHeight(13.8),
-          ),
-          Expanded(
-            child: PageView.builder(
-              itemCount:words.length ,
-              controller: controller,
-              itemBuilder: (context, index) => WordDetails(
-                word: words[index],
-                index: index,
-              ),
-            ),
-          ),
-        ],
-      ));
 }

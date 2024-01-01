@@ -31,7 +31,8 @@ class WordCubit extends Cubit<WordState> {
   void know(String title) {
     knownWords.add(title);
     words.removeWhere((element) => element.title == title);
-    emit(WordState.wordsChanged(words));
+    currentPage++;
+    emit(WordState.wordsChanged(words),);
   }
 
   void dontKnow(Word word, int currentIndex) {
