@@ -13,14 +13,17 @@ class WordCubit extends Cubit<WordState> {
   WordCubit({required this.repo}) : super(const WordState.initial(0));
 
   List<Word> words = [];
+  List<Word> wordsCache = [];
   List<String> knownWords = [];
   List<String> dontKnowWord = [];
   int currentPage = 0;
+  bool isFinished = false;
 
   Future<void> loadWords() async {
     emit(const WordState.loading());
     try {
       words = await repo.getWords();
+      wordsCache.addAll(words);
       emit(const WordState.success());
     } catch (e) {
       emit(const WordState.error(
@@ -32,8 +35,12 @@ class WordCubit extends Cubit<WordState> {
     knownWords.add(title);
     words.removeWhere((element) => element.title == title);
     currentPage++;
-    emit(WordState.wordsChanged(words),);
-    emit(const WordState.success());
+    if (words.isEmpty) {
+      emit(const WordState.finished());
+    } else {
+      emit(WordState.wordsChanged(words),);
+      emit(const WordState.success());
+    }
   }
 
   void dontKnow(Word word, int currentIndex) {
@@ -41,6 +48,12 @@ class WordCubit extends Cubit<WordState> {
     words.removeAt(currentIndex);
     currentPage++;
     emit(WordState.wordsChanged(words));
+    emit(const WordState.success());
+  }
+
+  void repeat() {
+    words.addAll(wordsCache);
+    print(words);
     emit(const WordState.success());
   }
 }

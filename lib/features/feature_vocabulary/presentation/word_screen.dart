@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task/features/feature_vocabulary/presentation/cubit/word_cubit.dart';
+import 'package:task/features/feature_vocabulary/presentation/widgets/finished_page.dart';
 import 'package:task/features/feature_vocabulary/presentation/widgets/word_details.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -57,7 +58,6 @@ class _WordScreenState extends State<WordScreen> {
           SafeArea(
             child: BlocBuilder<WordCubit, WordState>(
               builder: (context, state) {
-
                 return state.maybeWhen(
                   initial: (index) => Container(),
                   loading: () =>
@@ -75,7 +75,7 @@ class _WordScreenState extends State<WordScreen> {
                           child: const Text('Retry'))
                     ],
                   ),
-
+                  finished: ()=> FinishedPage(onPressed:()=> cubit.repeat()),
                   orElse: () => Center(
                     child: Column(
                       children: [
