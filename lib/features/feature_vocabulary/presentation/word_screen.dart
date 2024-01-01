@@ -24,7 +24,7 @@ class _WordScreenState extends State<WordScreen> {
   void initState() {
     final cubit = context.read<WordCubit>();
     controller =
-        PageController(keepPage: false, initialPage: cubit.currentPage);
+        PageController(keepPage: false, initialPage: 0);
     cubit.loadWords();
     super.initState();
   }
