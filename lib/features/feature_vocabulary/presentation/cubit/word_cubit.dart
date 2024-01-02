@@ -17,8 +17,9 @@ class WordCubit extends Cubit<WordState> {
 
   bool isFinished = false;
 
-  get isFirstPage => currentPage==0;
-  get isLastPage => currentPage==words.length-1;
+  get isFirstPage => currentPage == 0;
+
+  get isLastPage => currentPage == words.length - 1;
 
   Future<void> loadWords() async {
     emit(const WordState.loading());
@@ -31,24 +32,25 @@ class WordCubit extends Cubit<WordState> {
     }
   }
 
-  void goToNextPage() {
+  void goToNextPage(bool hasSwiped) {
     currentPage++;
-    if (currentPage == words.length) {
-      emit(const WordState.finished());
-    } else {
-      emit(
-        WordState.newPage(currentPage),
-      );
-    }
+
+    emit(
+      WordState.newPage(currentPage, hasSwiped),
+    );
   }
 
-  void goToPreviousPage() {
+  void goToPreviousPage(bool hasSwiped) {
     currentPage--;
-    emit(WordState.newPage(currentPage));
+    emit(WordState.newPage(currentPage, hasSwiped));
   }
 
   void repeat() {
-    currentPage=0;
+    currentPage = 0;
     emit(const WordState.success());
+  }
+
+  void finish() {
+    emit(const WordState.finished());
   }
 }

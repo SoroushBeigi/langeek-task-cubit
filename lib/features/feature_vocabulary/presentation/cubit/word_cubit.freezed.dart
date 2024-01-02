@@ -22,7 +22,7 @@ mixin _$WordState {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(int index) newPage,
+    required TResult Function(int index, bool hasSwiped) newPage,
     required TResult Function() finished,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ mixin _$WordState {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(int index)? newPage,
+    TResult? Function(int index, bool hasSwiped)? newPage,
     TResult? Function()? finished,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$WordState {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(int index)? newPage,
+    TResult Function(int index, bool hasSwiped)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) =>
@@ -164,7 +164,7 @@ class _$_Initial implements _Initial {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(int index) newPage,
+    required TResult Function(int index, bool hasSwiped) newPage,
     required TResult Function() finished,
   }) {
     return initial(index);
@@ -177,7 +177,7 @@ class _$_Initial implements _Initial {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(int index)? newPage,
+    TResult? Function(int index, bool hasSwiped)? newPage,
     TResult? Function()? finished,
   }) {
     return initial?.call(index);
@@ -190,7 +190,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(int index)? newPage,
+    TResult Function(int index, bool hasSwiped)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -294,7 +294,7 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(int index) newPage,
+    required TResult Function(int index, bool hasSwiped) newPage,
     required TResult Function() finished,
   }) {
     return loading();
@@ -307,7 +307,7 @@ class _$_Loading implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(int index)? newPage,
+    TResult? Function(int index, bool hasSwiped)? newPage,
     TResult? Function()? finished,
   }) {
     return loading?.call();
@@ -320,7 +320,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(int index)? newPage,
+    TResult Function(int index, bool hasSwiped)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -444,7 +444,7 @@ class _$_Error implements _Error {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(int index) newPage,
+    required TResult Function(int index, bool hasSwiped) newPage,
     required TResult Function() finished,
   }) {
     return error(this.error);
@@ -457,7 +457,7 @@ class _$_Error implements _Error {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(int index)? newPage,
+    TResult? Function(int index, bool hasSwiped)? newPage,
     TResult? Function()? finished,
   }) {
     return error?.call(this.error);
@@ -470,7 +470,7 @@ class _$_Error implements _Error {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(int index)? newPage,
+    TResult Function(int index, bool hasSwiped)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -574,7 +574,7 @@ class _$_Success implements _Success {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(int index) newPage,
+    required TResult Function(int index, bool hasSwiped) newPage,
     required TResult Function() finished,
   }) {
     return success();
@@ -587,7 +587,7 @@ class _$_Success implements _Success {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(int index)? newPage,
+    TResult? Function(int index, bool hasSwiped)? newPage,
     TResult? Function()? finished,
   }) {
     return success?.call();
@@ -600,7 +600,7 @@ class _$_Success implements _Success {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(int index)? newPage,
+    TResult Function(int index, bool hasSwiped)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -664,7 +664,7 @@ abstract class _$$_NewPageCopyWith<$Res> {
           _$_NewPage value, $Res Function(_$_NewPage) then) =
       __$$_NewPageCopyWithImpl<$Res>;
   @useResult
-  $Res call({int index});
+  $Res call({int index, bool hasSwiped});
 }
 
 /// @nodoc
@@ -678,12 +678,17 @@ class __$$_NewPageCopyWithImpl<$Res>
   @override
   $Res call({
     Object? index = null,
+    Object? hasSwiped = null,
   }) {
     return _then(_$_NewPage(
       null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
+      null == hasSwiped
+          ? _value.hasSwiped
+          : hasSwiped // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -691,14 +696,16 @@ class __$$_NewPageCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NewPage implements _NewPage {
-  const _$_NewPage(this.index);
+  const _$_NewPage(this.index, this.hasSwiped);
 
   @override
   final int index;
+  @override
+  final bool hasSwiped;
 
   @override
   String toString() {
-    return 'WordState.newPage(index: $index)';
+    return 'WordState.newPage(index: $index, hasSwiped: $hasSwiped)';
   }
 
   @override
@@ -706,11 +713,13 @@ class _$_NewPage implements _NewPage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NewPage &&
-            (identical(other.index, index) || other.index == index));
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.hasSwiped, hasSwiped) ||
+                other.hasSwiped == hasSwiped));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, index);
+  int get hashCode => Object.hash(runtimeType, index, hasSwiped);
 
   @JsonKey(ignore: true)
   @override
@@ -725,10 +734,10 @@ class _$_NewPage implements _NewPage {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(int index) newPage,
+    required TResult Function(int index, bool hasSwiped) newPage,
     required TResult Function() finished,
   }) {
-    return newPage(index);
+    return newPage(index, hasSwiped);
   }
 
   @override
@@ -738,10 +747,10 @@ class _$_NewPage implements _NewPage {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(int index)? newPage,
+    TResult? Function(int index, bool hasSwiped)? newPage,
     TResult? Function()? finished,
   }) {
-    return newPage?.call(index);
+    return newPage?.call(index, hasSwiped);
   }
 
   @override
@@ -751,12 +760,12 @@ class _$_NewPage implements _NewPage {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(int index)? newPage,
+    TResult Function(int index, bool hasSwiped)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
     if (newPage != null) {
-      return newPage(index);
+      return newPage(index, hasSwiped);
     }
     return orElse();
   }
@@ -806,9 +815,10 @@ class _$_NewPage implements _NewPage {
 }
 
 abstract class _NewPage implements WordState {
-  const factory _NewPage(final int index) = _$_NewPage;
+  const factory _NewPage(final int index, final bool hasSwiped) = _$_NewPage;
 
   int get index;
+  bool get hasSwiped;
   @JsonKey(ignore: true)
   _$$_NewPageCopyWith<_$_NewPage> get copyWith =>
       throw _privateConstructorUsedError;
@@ -856,7 +866,7 @@ class _$_Finished implements _Finished {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(int index) newPage,
+    required TResult Function(int index, bool hasSwiped) newPage,
     required TResult Function() finished,
   }) {
     return finished();
@@ -869,7 +879,7 @@ class _$_Finished implements _Finished {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(int index)? newPage,
+    TResult? Function(int index, bool hasSwiped)? newPage,
     TResult? Function()? finished,
   }) {
     return finished?.call();
@@ -882,7 +892,7 @@ class _$_Finished implements _Finished {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(int index)? newPage,
+    TResult Function(int index, bool hasSwiped)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {

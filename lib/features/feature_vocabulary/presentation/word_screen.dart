@@ -21,7 +21,8 @@ class _WordScreenState extends State<WordScreen> {
   @override
   void initState() {
     final cubit = context.read<WordCubit>();
-    controller = PageController(keepPage: false, initialPage: cubit.currentPage);
+    controller =
+        PageController(keepPage: false, initialPage: cubit.currentPage);
     cubit.loadWords();
     super.initState();
   }
@@ -56,8 +57,8 @@ class _WordScreenState extends State<WordScreen> {
             child: BlocConsumer<WordCubit, WordState>(
               listener: (context, state) {
                 state.maybeWhen(
-                  newPage: (index) {
-                    controller.animateToPage(index,duration: const Duration(milliseconds: 500),curve: Curves.easeInOut);
+                  newPage: (index, hasSwiped) {
+                    if (!hasSwiped) {}
                   },
                   orElse: () {},
                 );
@@ -94,9 +95,7 @@ class _WordScreenState extends State<WordScreen> {
                                 dotHeight: screenUtil.setHeight(6.9),
                                 spacing: 1,
                                 dotColor: Colors.blueGrey[300]!),
-                            onDotClicked: (index) {
-
-                            }),
+                            onDotClicked: (index) {}),
                         SizedBox(
                           height: screenUtil.setHeight(13.8),
                         ),
@@ -108,19 +107,46 @@ class _WordScreenState extends State<WordScreen> {
                               word: cubit.words[index],
                               index: index,
                             ),
+                            onPageChanged: (page) {
+                              if (page > cubit.currentPage) {
+                                cubit.goToNextPage(true);
+                              } else {
+                                cubit.goToPreviousPage(true);
+                              }
+                            },
                           ),
                         ),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                          ElevatedButton(
-                              onPressed:
-                                 cubit.isFirstPage?null:()=> cubit.goToPreviousPage(),
-                              child: const Text('Previous Word')),
-                          ElevatedButton(
-                              onPressed: () =>
-                                  context.read<WordCubit>().goToNextPage(),
-                              child: cubit.isLastPage? const Text('Finish'): const Text('Next Word')),
-                        ]),
-                        SizedBox(height: screenUtil.setHeight(15),)
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: cubit.isFirstPage
+                                      ? null
+                                      : () => controller.animateToPage(
+                                          controller.page!.floor() - 1,
+                                          duration:
+                                              const Duration(milliseconds: 500),
+                                          curve: Curves.easeInOut),
+                                  child: const Text('Previous Word')),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    if (cubit.isLastPage) {
+                                      cubit.finish();
+                                    } else {
+                                      controller.animateToPage(
+                                          controller.page!.floor() + 1,
+                                          duration:
+                                              const Duration(milliseconds: 500),
+                                          curve: Curves.easeInOut);
+                                    }
+                                  },
+                                  child: cubit.isLastPage
+                                      ? const Text('Finish')
+                                      : const Text('Next Word')),
+                            ]),
+                        SizedBox(
+                          height: screenUtil.setHeight(15),
+                        )
                       ],
                     ),
                   ),
