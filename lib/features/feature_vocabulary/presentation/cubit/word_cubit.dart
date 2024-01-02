@@ -14,7 +14,6 @@ class WordCubit extends Cubit<WordState> {
 
   int currentPage = 0;
   List<Word> words = [];
-  List<Word> wordsCache = [];
 
   bool isFinished = false;
 
@@ -22,7 +21,6 @@ class WordCubit extends Cubit<WordState> {
     emit(const WordState.loading());
     try {
       words = await repo.getWords();
-      wordsCache.addAll(words);
       emit(const WordState.success());
     } catch (e) {
       emit(const WordState.error(
@@ -47,7 +45,6 @@ class WordCubit extends Cubit<WordState> {
   }
 
   void repeat() {
-    words.addAll(wordsCache);
     emit(const WordState.success());
   }
 }
