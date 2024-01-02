@@ -12,6 +12,7 @@ class WordCubit extends Cubit<WordState> {
 
   WordCubit({required this.repo}) : super(const WordState.initial(0));
 
+  //TODO: private & getter setter
   int currentPage = 0;
   List<Word> words = [];
 
@@ -33,11 +34,9 @@ class WordCubit extends Cubit<WordState> {
   }
 
   void goToNextPage(bool hasSwiped) {
+    //TODO: consider using initial here
     currentPage++;
-
-    emit(
-      WordState.newPage(currentPage),
-    );
+    emit(WordState.newPage(currentPage));
   }
 
   void goToPreviousPage(bool hasSwiped) {
@@ -47,6 +46,7 @@ class WordCubit extends Cubit<WordState> {
 
   void repeat() {
     currentPage = 0;
+    //TODO: intiail
     emit(const WordState.success());
   }
 

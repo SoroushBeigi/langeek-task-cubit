@@ -20,10 +20,10 @@ class _WordScreenState extends State<WordScreen> {
 
   @override
   void initState() {
-    final cubit = context.read<WordCubit>();
+    final wordCubit = context.read<WordCubit>();
     controller =
-        PageController(keepPage: false, initialPage: cubit.currentPage);
-    cubit.loadWords();
+        PageController(keepPage: false, initialPage: wordCubit.currentPage);
+    wordCubit.loadWords();
     super.initState();
   }
 
@@ -36,7 +36,7 @@ class _WordScreenState extends State<WordScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil screenUtil = ScreenUtil();
-    final cubit = context.read<WordCubit>();
+    final wordCubit = context.read<WordCubit>();
     return Scaffold(
       body: Stack(
         children: [
@@ -69,11 +69,12 @@ class _WordScreenState extends State<WordScreen> {
                         style: const TextStyle(color: Colors.red),
                       ),
                       ElevatedButton(
-                          onPressed: () => cubit.loadWords(),
+                          onPressed: () => wordCubit.loadWords(),
                           child: const Text('Retry'))
                     ],
                   ),
-                  finished: () => FinishedPage(onPressed: () => cubit.repeat()),
+                  finished: () =>
+                      FinishedPage(onPressed: () => wordCubit.repeat()),
                   orElse: () => Center(
                     child: Column(
                       children: [
@@ -82,7 +83,7 @@ class _WordScreenState extends State<WordScreen> {
                         ),
                         SmoothPageIndicator(
                             controller: controller,
-                            count: cubit.words.length,
+                            count: wordCubit.words.length,
                             effect: SlideEffect(
                                 dotHeight: screenUtil.setHeight(6.9),
                                 spacing: 1,
@@ -93,17 +94,17 @@ class _WordScreenState extends State<WordScreen> {
                         ),
                         Expanded(
                           child: PageView.builder(
-                            itemCount: cubit.words.length,
+                            itemCount: wordCubit.words.length,
                             controller: controller,
                             itemBuilder: (context, index) => WordDetails(
-                              word: cubit.words[index],
+                              word: wordCubit.words[index],
                               index: index,
                             ),
                             onPageChanged: (page) {
-                              if (page > cubit.currentPage) {
-                                cubit.goToNextPage(true);
+                              if (page > wordCubit.currentPage) {
+                                wordCubit.goToNextPage(true);
                               } else {
-                                cubit.goToPreviousPage(true);
+                                wordCubit.goToPreviousPage(true);
                               }
                             },
                           ),
@@ -112,7 +113,7 @@ class _WordScreenState extends State<WordScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               ElevatedButton(
-                                  onPressed: cubit.isFirstPage
+                                  onPressed: wordCubit.isFirstPage
                                       ? null
                                       : () => controller.animateToPage(
                                           controller.page!.floor() - 1,
@@ -122,8 +123,8 @@ class _WordScreenState extends State<WordScreen> {
                                   child: const Text('Previous Word')),
                               ElevatedButton(
                                   onPressed: () {
-                                    if (cubit.isLastPage) {
-                                      cubit.finish();
+                                    if (wordCubit.isLastPage) {
+                                      wordCubit.finish();
                                     } else {
                                       controller.animateToPage(
                                           controller.page!.floor() + 1,
@@ -132,7 +133,7 @@ class _WordScreenState extends State<WordScreen> {
                                           curve: Curves.easeInOut);
                                     }
                                   },
-                                  child: cubit.isLastPage
+                                  child: wordCubit.isLastPage
                                       ? const Text('Finish')
                                       : const Text('Next Word')),
                             ]),
