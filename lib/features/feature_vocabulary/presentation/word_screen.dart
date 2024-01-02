@@ -112,13 +112,13 @@ class _WordScreenState extends State<WordScreen> {
                         ),
                         Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                           ElevatedButton(
-                              onPressed: () =>
-                                  context.read<WordCubit>().previousWord(),
+                              onPressed:
+                                 cubit.isFirstPage?null:()=> cubit.goToPreviousPage(),
                               child: const Text('Previous Word')),
                           ElevatedButton(
                               onPressed: () =>
-                                  context.read<WordCubit>().nextWord(),
-                              child: const Text('Next Word')),
+                                  context.read<WordCubit>().goToNextPage(),
+                              child: cubit.isLastPage? const Text('Finish'): const Text('Next Word')),
                         ]),
                         SizedBox(height: screenUtil.setHeight(15),)
                       ],
