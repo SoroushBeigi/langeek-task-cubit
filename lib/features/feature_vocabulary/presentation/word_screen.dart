@@ -54,15 +54,7 @@ class _WordScreenState extends State<WordScreen> {
             ),
           ),
           SafeArea(
-            child: BlocConsumer<WordCubit, WordState>(
-              listener: (context, state) {
-                state.maybeWhen(
-                  newPage: (index, hasSwiped) {
-                    if (!hasSwiped) {}
-                  },
-                  orElse: () {},
-                );
-              },
+            child: BlocBuilder<WordCubit, WordState>(
               builder: (context, state) {
                 return state.maybeWhen(
                   initial: (index) => Container(),

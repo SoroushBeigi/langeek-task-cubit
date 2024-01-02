@@ -36,13 +36,13 @@ class WordCubit extends Cubit<WordState> {
     currentPage++;
 
     emit(
-      WordState.newPage(currentPage, hasSwiped),
+      WordState.newPage(currentPage),
     );
   }
 
   void goToPreviousPage(bool hasSwiped) {
     currentPage--;
-    emit(WordState.newPage(currentPage, hasSwiped));
+    emit(WordState.newPage(currentPage));
   }
 
   void repeat() {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task/features/feature_vocabulary/domain/entities/word.dart';
-import 'package:task/features/feature_vocabulary/presentation/cubit/word_cubit.dart';
 
 class WordDetails extends StatefulWidget {
   final Word word;
