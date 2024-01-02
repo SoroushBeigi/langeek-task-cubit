@@ -6,6 +6,6 @@ class WordState with _$WordState {
   const factory WordState.loading() = _Loading;
   const factory WordState.error(String error) = _Error;
   const factory WordState.success() = _Success;
-  const factory WordState.wordsChanged(List<Word> words) = _Changed;
+  const factory WordState.newPage(int index) = _NewPage;
   const factory WordState.finished() = _Finished;
 }

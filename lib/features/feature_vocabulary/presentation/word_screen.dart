@@ -6,8 +6,6 @@ import 'package:task/features/feature_vocabulary/presentation/widgets/finished_p
 import 'package:task/features/feature_vocabulary/presentation/widgets/word_details.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../domain/entities/word.dart';
-
 class WordScreen extends StatefulWidget {
   const WordScreen({super.key, required this.title});
 
@@ -23,8 +21,7 @@ class _WordScreenState extends State<WordScreen> {
   @override
   void initState() {
     final cubit = context.read<WordCubit>();
-    controller =
-        PageController(keepPage: false, initialPage: 0);
+    controller = PageController(keepPage: false, initialPage: cubit.currentPage);
     cubit.loadWords();
     super.initState();
   }
@@ -56,7 +53,15 @@ class _WordScreenState extends State<WordScreen> {
             ),
           ),
           SafeArea(
-            child: BlocBuilder<WordCubit, WordState>(
+            child: BlocConsumer<WordCubit, WordState>(
+              listener: (context, state) {
+                state.maybeWhen(
+                  newPage: (index) {
+                    controller.jumpToPage(index);
+                  },
+                  orElse: () {},
+                );
+              },
               builder: (context, state) {
                 return state.maybeWhen(
                   initial: (index) => Container(),
@@ -75,7 +80,7 @@ class _WordScreenState extends State<WordScreen> {
                           child: const Text('Retry'))
                     ],
                   ),
-                  finished: ()=> FinishedPage(onPressed:()=> cubit.repeat()),
+                  finished: () => FinishedPage(onPressed: () => cubit.repeat()),
                   orElse: () => Center(
                     child: Column(
                       children: [

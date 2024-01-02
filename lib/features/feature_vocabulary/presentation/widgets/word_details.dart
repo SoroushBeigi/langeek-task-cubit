@@ -119,12 +119,12 @@ class _WordDetailsState extends State<WordDetails> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 ElevatedButton(
                     onPressed: () =>
-                        context.read<WordCubit>().know(word.title!),
-                    child: const Text('I know this')),
+                        context.read<WordCubit>().previousWord(),
+                    child: const Text('Previous Word')),
                 ElevatedButton(
                     onPressed: () =>
-                        context.read<WordCubit>().dontKnow(word, widget.index),
-                    child: const Text('I do not know this')),
+                        context.read<WordCubit>().nextWord(),
+                    child: const Text('Next Word')),
               ]),
             ],
           ),

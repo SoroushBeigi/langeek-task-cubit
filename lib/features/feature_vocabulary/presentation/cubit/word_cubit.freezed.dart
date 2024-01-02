@@ -22,7 +22,7 @@ mixin _$WordState {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(List<Word> words) wordsChanged,
+    required TResult Function(int index) newPage,
     required TResult Function() finished,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ mixin _$WordState {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(List<Word> words)? wordsChanged,
+    TResult? Function(int index)? newPage,
     TResult? Function()? finished,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$WordState {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(List<Word> words)? wordsChanged,
+    TResult Function(int index)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) =>
@@ -53,7 +53,7 @@ mixin _$WordState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Changed value) wordsChanged,
+    required TResult Function(_NewPage value) newPage,
     required TResult Function(_Finished value) finished,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ mixin _$WordState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Changed value)? wordsChanged,
+    TResult? Function(_NewPage value)? newPage,
     TResult? Function(_Finished value)? finished,
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +73,7 @@ mixin _$WordState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Changed value)? wordsChanged,
+    TResult Function(_NewPage value)? newPage,
     TResult Function(_Finished value)? finished,
     required TResult orElse(),
   }) =>
@@ -164,7 +164,7 @@ class _$_Initial implements _Initial {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(List<Word> words) wordsChanged,
+    required TResult Function(int index) newPage,
     required TResult Function() finished,
   }) {
     return initial(index);
@@ -177,7 +177,7 @@ class _$_Initial implements _Initial {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(List<Word> words)? wordsChanged,
+    TResult? Function(int index)? newPage,
     TResult? Function()? finished,
   }) {
     return initial?.call(index);
@@ -190,7 +190,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(List<Word> words)? wordsChanged,
+    TResult Function(int index)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -207,7 +207,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Changed value) wordsChanged,
+    required TResult Function(_NewPage value) newPage,
     required TResult Function(_Finished value) finished,
   }) {
     return initial(this);
@@ -220,7 +220,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Changed value)? wordsChanged,
+    TResult? Function(_NewPage value)? newPage,
     TResult? Function(_Finished value)? finished,
   }) {
     return initial?.call(this);
@@ -233,7 +233,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Changed value)? wordsChanged,
+    TResult Function(_NewPage value)? newPage,
     TResult Function(_Finished value)? finished,
     required TResult orElse(),
   }) {
@@ -294,7 +294,7 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(List<Word> words) wordsChanged,
+    required TResult Function(int index) newPage,
     required TResult Function() finished,
   }) {
     return loading();
@@ -307,7 +307,7 @@ class _$_Loading implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(List<Word> words)? wordsChanged,
+    TResult? Function(int index)? newPage,
     TResult? Function()? finished,
   }) {
     return loading?.call();
@@ -320,7 +320,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(List<Word> words)? wordsChanged,
+    TResult Function(int index)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -337,7 +337,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Changed value) wordsChanged,
+    required TResult Function(_NewPage value) newPage,
     required TResult Function(_Finished value) finished,
   }) {
     return loading(this);
@@ -350,7 +350,7 @@ class _$_Loading implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Changed value)? wordsChanged,
+    TResult? Function(_NewPage value)? newPage,
     TResult? Function(_Finished value)? finished,
   }) {
     return loading?.call(this);
@@ -363,7 +363,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Changed value)? wordsChanged,
+    TResult Function(_NewPage value)? newPage,
     TResult Function(_Finished value)? finished,
     required TResult orElse(),
   }) {
@@ -444,7 +444,7 @@ class _$_Error implements _Error {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(List<Word> words) wordsChanged,
+    required TResult Function(int index) newPage,
     required TResult Function() finished,
   }) {
     return error(this.error);
@@ -457,7 +457,7 @@ class _$_Error implements _Error {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(List<Word> words)? wordsChanged,
+    TResult? Function(int index)? newPage,
     TResult? Function()? finished,
   }) {
     return error?.call(this.error);
@@ -470,7 +470,7 @@ class _$_Error implements _Error {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(List<Word> words)? wordsChanged,
+    TResult Function(int index)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -487,7 +487,7 @@ class _$_Error implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Changed value) wordsChanged,
+    required TResult Function(_NewPage value) newPage,
     required TResult Function(_Finished value) finished,
   }) {
     return error(this);
@@ -500,7 +500,7 @@ class _$_Error implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Changed value)? wordsChanged,
+    TResult? Function(_NewPage value)? newPage,
     TResult? Function(_Finished value)? finished,
   }) {
     return error?.call(this);
@@ -513,7 +513,7 @@ class _$_Error implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Changed value)? wordsChanged,
+    TResult Function(_NewPage value)? newPage,
     TResult Function(_Finished value)? finished,
     required TResult orElse(),
   }) {
@@ -574,7 +574,7 @@ class _$_Success implements _Success {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(List<Word> words) wordsChanged,
+    required TResult Function(int index) newPage,
     required TResult Function() finished,
   }) {
     return success();
@@ -587,7 +587,7 @@ class _$_Success implements _Success {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(List<Word> words)? wordsChanged,
+    TResult? Function(int index)? newPage,
     TResult? Function()? finished,
   }) {
     return success?.call();
@@ -600,7 +600,7 @@ class _$_Success implements _Success {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(List<Word> words)? wordsChanged,
+    TResult Function(int index)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -617,7 +617,7 @@ class _$_Success implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Changed value) wordsChanged,
+    required TResult Function(_NewPage value) newPage,
     required TResult Function(_Finished value) finished,
   }) {
     return success(this);
@@ -630,7 +630,7 @@ class _$_Success implements _Success {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Changed value)? wordsChanged,
+    TResult? Function(_NewPage value)? newPage,
     TResult? Function(_Finished value)? finished,
   }) {
     return success?.call(this);
@@ -643,7 +643,7 @@ class _$_Success implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Changed value)? wordsChanged,
+    TResult Function(_NewPage value)? newPage,
     TResult Function(_Finished value)? finished,
     required TResult orElse(),
   }) {
@@ -659,70 +659,64 @@ abstract class _Success implements WordState {
 }
 
 /// @nodoc
-abstract class _$$_ChangedCopyWith<$Res> {
-  factory _$$_ChangedCopyWith(
-          _$_Changed value, $Res Function(_$_Changed) then) =
-      __$$_ChangedCopyWithImpl<$Res>;
+abstract class _$$_NewPageCopyWith<$Res> {
+  factory _$$_NewPageCopyWith(
+          _$_NewPage value, $Res Function(_$_NewPage) then) =
+      __$$_NewPageCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Word> words});
+  $Res call({int index});
 }
 
 /// @nodoc
-class __$$_ChangedCopyWithImpl<$Res>
-    extends _$WordStateCopyWithImpl<$Res, _$_Changed>
-    implements _$$_ChangedCopyWith<$Res> {
-  __$$_ChangedCopyWithImpl(_$_Changed _value, $Res Function(_$_Changed) _then)
+class __$$_NewPageCopyWithImpl<$Res>
+    extends _$WordStateCopyWithImpl<$Res, _$_NewPage>
+    implements _$$_NewPageCopyWith<$Res> {
+  __$$_NewPageCopyWithImpl(_$_NewPage _value, $Res Function(_$_NewPage) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? words = null,
+    Object? index = null,
   }) {
-    return _then(_$_Changed(
-      null == words
-          ? _value._words
-          : words // ignore: cast_nullable_to_non_nullable
-              as List<Word>,
+    return _then(_$_NewPage(
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Changed implements _Changed {
-  const _$_Changed(final List<Word> words) : _words = words;
+class _$_NewPage implements _NewPage {
+  const _$_NewPage(this.index);
 
-  final List<Word> _words;
   @override
-  List<Word> get words {
-    if (_words is EqualUnmodifiableListView) return _words;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_words);
-  }
+  final int index;
 
   @override
   String toString() {
-    return 'WordState.wordsChanged(words: $words)';
+    return 'WordState.newPage(index: $index)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Changed &&
-            const DeepCollectionEquality().equals(other._words, _words));
+            other is _$_NewPage &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_words));
+  int get hashCode => Object.hash(runtimeType, index);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChangedCopyWith<_$_Changed> get copyWith =>
-      __$$_ChangedCopyWithImpl<_$_Changed>(this, _$identity);
+  _$$_NewPageCopyWith<_$_NewPage> get copyWith =>
+      __$$_NewPageCopyWithImpl<_$_NewPage>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -731,10 +725,10 @@ class _$_Changed implements _Changed {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(List<Word> words) wordsChanged,
+    required TResult Function(int index) newPage,
     required TResult Function() finished,
   }) {
-    return wordsChanged(words);
+    return newPage(index);
   }
 
   @override
@@ -744,10 +738,10 @@ class _$_Changed implements _Changed {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(List<Word> words)? wordsChanged,
+    TResult? Function(int index)? newPage,
     TResult? Function()? finished,
   }) {
-    return wordsChanged?.call(words);
+    return newPage?.call(index);
   }
 
   @override
@@ -757,12 +751,12 @@ class _$_Changed implements _Changed {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(List<Word> words)? wordsChanged,
+    TResult Function(int index)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
-    if (wordsChanged != null) {
-      return wordsChanged(words);
+    if (newPage != null) {
+      return newPage(index);
     }
     return orElse();
   }
@@ -774,10 +768,10 @@ class _$_Changed implements _Changed {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Changed value) wordsChanged,
+    required TResult Function(_NewPage value) newPage,
     required TResult Function(_Finished value) finished,
   }) {
-    return wordsChanged(this);
+    return newPage(this);
   }
 
   @override
@@ -787,10 +781,10 @@ class _$_Changed implements _Changed {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Changed value)? wordsChanged,
+    TResult? Function(_NewPage value)? newPage,
     TResult? Function(_Finished value)? finished,
   }) {
-    return wordsChanged?.call(this);
+    return newPage?.call(this);
   }
 
   @override
@@ -800,23 +794,23 @@ class _$_Changed implements _Changed {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Changed value)? wordsChanged,
+    TResult Function(_NewPage value)? newPage,
     TResult Function(_Finished value)? finished,
     required TResult orElse(),
   }) {
-    if (wordsChanged != null) {
-      return wordsChanged(this);
+    if (newPage != null) {
+      return newPage(this);
     }
     return orElse();
   }
 }
 
-abstract class _Changed implements WordState {
-  const factory _Changed(final List<Word> words) = _$_Changed;
+abstract class _NewPage implements WordState {
+  const factory _NewPage(final int index) = _$_NewPage;
 
-  List<Word> get words;
+  int get index;
   @JsonKey(ignore: true)
-  _$$_ChangedCopyWith<_$_Changed> get copyWith =>
+  _$$_NewPageCopyWith<_$_NewPage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -862,7 +856,7 @@ class _$_Finished implements _Finished {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() success,
-    required TResult Function(List<Word> words) wordsChanged,
+    required TResult Function(int index) newPage,
     required TResult Function() finished,
   }) {
     return finished();
@@ -875,7 +869,7 @@ class _$_Finished implements _Finished {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? success,
-    TResult? Function(List<Word> words)? wordsChanged,
+    TResult? Function(int index)? newPage,
     TResult? Function()? finished,
   }) {
     return finished?.call();
@@ -888,7 +882,7 @@ class _$_Finished implements _Finished {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? success,
-    TResult Function(List<Word> words)? wordsChanged,
+    TResult Function(int index)? newPage,
     TResult Function()? finished,
     required TResult orElse(),
   }) {
@@ -905,7 +899,7 @@ class _$_Finished implements _Finished {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
-    required TResult Function(_Changed value) wordsChanged,
+    required TResult Function(_NewPage value) newPage,
     required TResult Function(_Finished value) finished,
   }) {
     return finished(this);
@@ -918,7 +912,7 @@ class _$_Finished implements _Finished {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_Success value)? success,
-    TResult? Function(_Changed value)? wordsChanged,
+    TResult? Function(_NewPage value)? newPage,
     TResult? Function(_Finished value)? finished,
   }) {
     return finished?.call(this);
@@ -931,7 +925,7 @@ class _$_Finished implements _Finished {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
-    TResult Function(_Changed value)? wordsChanged,
+    TResult Function(_NewPage value)? newPage,
     TResult Function(_Finished value)? finished,
     required TResult orElse(),
   }) {
