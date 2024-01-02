@@ -57,7 +57,7 @@ class _WordScreenState extends State<WordScreen> {
               listener: (context, state) {
                 state.maybeWhen(
                   newPage: (index) {
-                    controller.jumpToPage(index);
+                    controller.animateToPage(index,duration: const Duration(milliseconds: 500),curve: Curves.easeInOut);
                   },
                   orElse: () {},
                 );
