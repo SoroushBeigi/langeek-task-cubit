@@ -95,9 +95,7 @@ class _WordScreenState extends State<WordScreen> {
                                 spacing: 1,
                                 dotColor: Colors.blueGrey[300]!),
                             onDotClicked: (index) {
-                              //TODO: Implement
-                              // BlocProvider.of<WordBloc>(context)
-                              //     .add(ChangePageEvent(page: index));
+
                             }),
                         SizedBox(
                           height: screenUtil.setHeight(13.8),
@@ -112,6 +110,17 @@ class _WordScreenState extends State<WordScreen> {
                             ),
                           ),
                         ),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                          ElevatedButton(
+                              onPressed: () =>
+                                  context.read<WordCubit>().previousWord(),
+                              child: const Text('Previous Word')),
+                          ElevatedButton(
+                              onPressed: () =>
+                                  context.read<WordCubit>().nextWord(),
+                              child: const Text('Next Word')),
+                        ]),
+                        SizedBox(height: screenUtil.setHeight(15),)
                       ],
                     ),
                   ),

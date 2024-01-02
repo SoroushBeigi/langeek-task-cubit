@@ -16,8 +16,6 @@ class WordCubit extends Cubit<WordState> {
   List<Word> words = [];
   List<Word> wordsCache = [];
 
-  // List<String> knownWords = [];
-  // List<String> dontKnowWord = [];
   bool isFinished = false;
 
   Future<void> loadWords() async {
@@ -33,8 +31,6 @@ class WordCubit extends Cubit<WordState> {
   }
 
   void nextWord() {
-    // knownWords.add(title);
-    // words.removeWhere((element) => element.title == title);
     currentPage++;
     if (currentPage == words.length) {
       emit(const WordState.finished());
@@ -46,8 +42,6 @@ class WordCubit extends Cubit<WordState> {
   }
 
   void previousWord() {
-    // words.add(word);
-    // words.removeAt(currentIndex);
     currentPage--;
     emit(WordState.newPage(currentPage));
   }

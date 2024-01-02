@@ -113,19 +113,6 @@ class _WordDetailsState extends State<WordDetails> {
                           .take(3)
                           .toList(),
                 ),
-              SizedBox(
-                height: screenUtil.setHeight(34.5),
-              ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                ElevatedButton(
-                    onPressed: () =>
-                        context.read<WordCubit>().previousWord(),
-                    child: const Text('Previous Word')),
-                ElevatedButton(
-                    onPressed: () =>
-                        context.read<WordCubit>().nextWord(),
-                    child: const Text('Next Word')),
-              ]),
             ],
           ),
         ),
