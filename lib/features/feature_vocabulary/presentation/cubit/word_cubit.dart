@@ -48,6 +48,7 @@ class WordCubit extends Cubit<WordState> {
   }
 
   void repeat() {
+    currentPage=0;
     emit(const WordState.success());
   }
 }
