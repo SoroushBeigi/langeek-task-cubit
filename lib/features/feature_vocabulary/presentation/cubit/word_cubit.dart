@@ -12,20 +12,21 @@ class WordCubit extends Cubit<WordState> {
 
   WordCubit({required this.repo}) : super(const WordState.initial(0));
 
-  //TODO: private & getter setter
-  int currentPage = 0;
-  List<Word> words = [];
+
+  int _currentPage = 0;
+  List<Word> _words = [];
 
   bool isFinished = false;
 
-  get isFirstPage => currentPage == 0;
-
-  get isLastPage => currentPage == words.length - 1;
+  get words => _words;
+  get currentPage => _currentPage;
+  get isFirstPage => _currentPage == 0;
+  get isLastPage => _currentPage == _words.length - 1;
 
   Future<void> loadWords() async {
     emit(const WordState.loading());
     try {
-      words = await repo.getWords();
+      _words = await repo.getWords();
       emit(const WordState.success());
     } catch (e) {
       emit(const WordState.error(
@@ -34,18 +35,17 @@ class WordCubit extends Cubit<WordState> {
   }
 
   void goToNextPage(bool hasSwiped) {
-    //TODO: consider using initial here
-    currentPage++;
-    emit(WordState.newPage(currentPage));
+    _currentPage++;
+    emit(WordState.newPage(_currentPage));
   }
 
   void goToPreviousPage(bool hasSwiped) {
-    currentPage--;
-    emit(WordState.newPage(currentPage));
+    _currentPage--;
+    emit(WordState.newPage(_currentPage));
   }
 
   void repeat() {
-    currentPage = 0;
+    _currentPage = 0;
     //TODO: intiail
     emit(const WordState.success());
   }
