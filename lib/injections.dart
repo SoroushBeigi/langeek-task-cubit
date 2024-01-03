@@ -15,6 +15,4 @@ setup() async {
     apiProvider: locator(),
   ));
 
-  //TODO
-  locator.registerSingleton<WordCubit>(WordCubit(repo: locator()));
 }
