@@ -16,8 +16,6 @@ class WordCubit extends Cubit<WordState> {
   int _currentPage = 0;
   List<Word> _words = [];
 
-  bool isFinished = false;
-
   get words => _words;
   get currentPage => _currentPage;
   get isFirstPage => _currentPage == 0;
@@ -46,8 +44,7 @@ class WordCubit extends Cubit<WordState> {
 
   void repeat() {
     _currentPage = 0;
-    //TODO: intiail
-    emit(const WordState.success());
+    emit(const WordState.initial(0));
   }
 
   void finish() {
