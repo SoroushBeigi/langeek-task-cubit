@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeData,
       home: BlocProvider(
-        //TODO
         create: (context) => WordCubit(repo: locator<WordRepository>()),
         child: const WordScreen(title: 'Hello & Goodbye'),
       ),

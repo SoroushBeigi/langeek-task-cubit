@@ -57,21 +57,22 @@ class _WordScreenState extends State<WordScreen> {
             child: BlocBuilder<WordCubit, WordState>(
               builder: (context, state) {
                 return state.maybeWhen(
-                  initial: (index) => Container(),
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
-                  error: (err) => Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        err,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                      ElevatedButton(
-                          onPressed: () => wordCubit.loadWords(),
-                          child: const Text('Retry'))
-                    ],
+                  error: (err) => Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          err,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                        ElevatedButton(
+                            onPressed: () => wordCubit.loadWords(),
+                            child: const Text('Retry'))
+                      ],
+                    ),
                   ),
                   finished: () =>
                       FinishedPage(onPressed: () => wordCubit.repeat()),

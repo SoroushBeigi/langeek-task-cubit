@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:task/core/api/api_result.dart';
 import 'package:task/features/feature_vocabulary/domain/entities/word.dart';
 import 'package:task/features/feature_vocabulary/domain/repositories/word_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'word_state.dart';
 
@@ -12,24 +13,29 @@ class WordCubit extends Cubit<WordState> {
 
   WordCubit({required this.repo}) : super(const WordState.initial(0));
 
-
   int _currentPage = 0;
   List<Word> _words = [];
 
   get words => _words;
+
   get currentPage => _currentPage;
+
   get isFirstPage => _currentPage == 0;
+
   get isLastPage => _currentPage == _words.length - 1;
 
   Future<void> loadWords() async {
     emit(const WordState.loading());
-    try {
-      _words = await repo.getWords();
-      emit(const WordState.success());
-    } catch (e) {
-      emit(const WordState.error(
-          'Something Happened, Check your internet connection!'));
-    }
+    final result = await repo.getWords();
+    result.when(
+      success: (data) {
+        _words = data;
+        emit(const WordState.success());
+      },
+      failure: (error) => emit(
+        WordState.error(error),
+      ),
+    );
   }
 
   void goToNextPage(bool hasSwiped) {
